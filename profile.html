@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile - JobPortal</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+        }
+
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: 15px 0;
+        }
+
+        .brand {
+            font-size: 23px;
+            font-weight: 700;
+            color: #0d6efd;
+            text-decoration: none;
+        }
+
+        .brand i {
+            margin-right: 7px;
+        }
+
+        .nav-link {
+            color: #555 !important;
+            font-weight: 500;
+            margin: 0 7px;
+        }
+
+        .nav-link:hover {
+            color: #0d6efd !important;
+        }
+
+        .page-container {
+            padding: 45px 15px;
+        }
+
+        .profile-card {
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #e9ecef;
+            overflow: hidden;
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .profile-header {
+            background: linear-gradient(
+                135deg,
+                #0d6efd,
+                #4f8df7
+            );
+            padding: 45px 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            background: #ffffff;
+            color: #0d6efd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            font-size: 48px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .profile-header h2 {
+            margin-top: 18px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .profile-header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .role-badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 7px 16px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .profile-body {
+            padding: 35px;
+        }
+
+        .section-title {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            border-radius: 13px;
+            padding: 18px;
+            margin-bottom: 15px;
+            border: 1px solid #eeeeee;
+        }
+
+        .info-icon {
+            width: 43px;
+            height: 43px;
+            border-radius: 11px;
+            background: #eef4ff;
+            color: #0d6efd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #6c757d;
+            margin-bottom: 3px;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .action-area {
+            border-top: 1px solid #eeeeee;
+            margin-top: 25px;
+            padding-top: 25px;
+            text-align: center;
+        }
+
+        footer {
+            background: #ffffff;
+            border-top: 1px solid #e9ecef;
+            padding: 20px 0;
+            margin-top: 35px;
+        }
+
+        footer p {
+            margin: 0;
+            text-align: center;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        @media (max-width: 576px) {
+
+            .profile-body {
+                padding: 25px 18px;
+            }
+
+            .profile-header {
+                padding: 35px 20px;
+            }
+
+        }
+
+    </style>
+
+<link rel="stylesheet" href="css/ui-polish.css">
+</head>
+
+<body class="jp-reveal">
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg sticky-top">
+
+    <div class="container">
+
+        <a
+            href="#"
+            id="brandLink"
+            class="brand">
+
+            <i class="bi bi-briefcase-fill"></i>
+            JobPortal
+
+        </a>
+
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div
+            class="collapse navbar-collapse"
+            id="navbarMenu">
+
+            <ul
+                class="navbar-nav ms-auto align-items-lg-center"
+                id="navMenu">
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container page-container">
+
+    <div class="profile-card">
+
+
+        <!-- PROFILE HEADER -->
+
+        <div class="profile-header">
+
+            <div class="profile-avatar">
+
+                <i class="bi bi-person-fill"></i>
+
+            </div>
+
+
+            <h2 id="profileName">
+                Loading...
+            </h2>
+
+
+            <p id="profileEmail">
+                Loading...
+            </p>
+
+
+            <div
+                class="role-badge"
+                id="profileRole">
+
+                USER
+
+            </div>
+
+        </div>
+
+
+        <!-- PROFILE BODY -->
+
+        <div class="profile-body">
+
+
+            <div class="section-title">
+
+                <i class="bi bi-person-vcard text-primary"></i>
+
+                Personal Information
+
+            </div>
+
+
+            <!-- NAME -->
+
+            <div class="info-box">
+
+                <div class="d-flex align-items-center gap-3">
+
+                    <div class="info-icon">
+
+                        <i class="bi bi-person"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="info-label">
+                            Full Name
+                        </div>
+
+                        <div
+                            class="info-value"
+                            id="nameValue">
+
+                            -
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="info-box">
+
+                <div class="d-flex align-items-center gap-3">
+
+                    <div class="info-icon">
+
+                        <i class="bi bi-envelope"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="info-label">
+                            Email Address
+                        </div>
+
+                        <div
+                            class="info-value"
+                            id="emailValue">
+
+                            -
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PHONE -->
+
+            <div class="info-box">
+
+                <div class="d-flex align-items-center gap-3">
+
+                    <div class="info-icon">
+
+                        <i class="bi bi-telephone"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="info-label">
+                            Phone Number
+                        </div>
+
+                        <div
+                            class="info-value"
+                            id="phoneValue">
+
+                            -
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ROLE -->
+
+            <div class="info-box">
+
+                <div class="d-flex align-items-center gap-3">
+
+                    <div class="info-icon">
+
+                        <i class="bi bi-shield-check"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="info-label">
+                            Account Role
+                        </div>
+
+                        <div
+                            class="info-value"
+                            id="roleValue">
+
+                            -
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTION -->
+
+            <div class="action-area">
+
+                <button
+                    class="btn btn-outline-danger px-4"
+                    onclick="logout()">
+
+                    <i class="bi bi-box-arrow-right"></i>
+
+                    Logout
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="container">
+
+        <p>
+            © 2026 JobPortal. All rights reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<script>
+
+/* ==========================================
+   GET LOGGED USER
+========================================== */
+
+const user =
+    JSON.parse(sessionStorage.getItem("loggedInUser")) ||
+    JSON.parse(localStorage.getItem("loggedInUser"));
+
+
+/* ==========================================
+   LOGIN CHECK
+========================================== */
+
+if (!user) {
+
+    window.location.href = "login.html";
+
+}
+
+
+/* ==========================================
+   DISPLAY USER
+========================================== */
+
+if (user) {
+
+    document.getElementById("profileName")
+        .textContent =
+        user.name || "User";
+
+
+    document.getElementById("profileEmail")
+        .textContent =
+        user.email || "Not available";
+
+
+    document.getElementById("profileRole")
+        .textContent =
+        user.role || "USER";
+
+
+    document.getElementById("nameValue")
+        .textContent =
+        user.name || "Not available";
+
+
+    document.getElementById("emailValue")
+        .textContent =
+        user.email || "Not available";
+
+
+    document.getElementById("phoneValue")
+        .textContent =
+        user.phone || "Not available";
+
+
+    document.getElementById("roleValue")
+        .textContent =
+        user.role || "USER";
+
+}
+
+
+/* ==========================================
+   NAVIGATION
+========================================== */
+
+const navMenu =
+    document.getElementById("navMenu");
+
+
+if (user && user.role === "RECRUITER") {
+
+    navMenu.innerHTML = `
+
+        <li class="nav-item">
+            <a
+                class="nav-link"
+                href="recruiter-dashboard.html">
+                Dashboard
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a
+                class="nav-link"
+                href="post-job.html">
+                Post Job
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a
+                class="nav-link"
+                href="manage-jobs.html">
+                Manage Jobs
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a
+                class="nav-link"
+                href="applications.html">
+                Applications
+            </a>
+        </li>
+
+    `;
+
+
+    document.getElementById("brandLink")
+        .href =
+        "recruiter-dashboard.html";
+
+}
+
+
+else {
+
+    navMenu.innerHTML = `
+
+        <li class="nav-item">
+            <a
+                class="nav-link"
+                href="jobs.html">
+                Jobs
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a
+                class="nav-link"
+                href="my-applications.html">
+                My Applications
+            </a>
+        </li>
+
+    `;
+
+
+    document.getElementById("brandLink")
+        .href =
+        "jobs.html";
+
+}
+
+
+/* ==========================================
+   LOGOUT
+========================================== */
+
+function logout() {
+
+    sessionStorage.removeItem(
+        "loggedInUser"
+    );
+
+    sessionStorage.removeItem(
+        "userEmail"
+    );
+
+    sessionStorage.removeItem(
+        "userPassword"
+    );
+
+    localStorage.removeItem(
+        "loggedInUser"
+    );
+
+    localStorage.removeItem(
+        "selectedJobId"
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+</script>
+
+</body>
+</html>

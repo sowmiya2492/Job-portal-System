@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Post a Job - JobPortal</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #212529;
+        }
+
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: 15px 0;
+        }
+
+        .brand {
+            font-size: 23px;
+            font-weight: 700;
+            color: #0d6efd;
+            text-decoration: none;
+        }
+
+        .brand i {
+            margin-right: 7px;
+        }
+
+        .nav-link {
+            color: #555 !important;
+            font-weight: 500;
+            margin: 0 7px;
+        }
+
+        .nav-link:hover {
+            color: #0d6efd !important;
+        }
+
+        .page-container {
+            padding: 45px 15px;
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header h2 {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #6c757d;
+            margin: 0;
+        }
+
+        .form-card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 35px;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+        }
+
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-control,
+        .form-select {
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid #ced4da;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.2rem rgba(13,110,253,0.12);
+        }
+
+        textarea.form-control {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon i {
+            position: absolute;
+            left: 14px;
+            top: 14px;
+            color: #6c757d;
+        }
+
+        .input-icon .form-control {
+            padding-left: 42px;
+        }
+
+        .required {
+            color: #dc3545;
+        }
+
+        .submit-btn {
+            padding: 12px 28px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .cancel-btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .info-card {
+            background: #eef5ff;
+            border: 1px solid #d5e5ff;
+            border-radius: 15px;
+            padding: 22px;
+        }
+
+        .info-card h6 {
+            font-weight: 700;
+            color: #0d6efd;
+        }
+
+        .info-card p {
+            color: #5f6b7a;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        footer {
+            background: #ffffff;
+            border-top: 1px solid #e9ecef;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+
+        footer p {
+            margin: 0;
+            text-align: center;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .form-card {
+                padding: 22px;
+            }
+
+            .page-container {
+                padding: 30px 15px;
+            }
+        }
+    </style>
+<link rel="stylesheet" href="css/ui-polish.css">
+</head>
+
+<body class="jp-reveal">
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg sticky-top">
+
+    <div class="container">
+
+        <a href="recruiter-dashboard.html" class="brand">
+            <i class="bi bi-briefcase-fill"></i>
+            JobPortal
+        </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMenu">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        href="recruiter-dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        href="post-job.html">
+                        Post Job
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        href="manage-jobs.html">
+                        Manage Jobs
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        href="applications.html">
+                        Applications
+                    </a>
+                </li>
+
+                <li class="nav-item ms-lg-2">
+
+                    <button
+                        class="btn btn-outline-primary rounded-pill px-3"
+                        onclick="logout()">
+
+                        <i class="bi bi-box-arrow-right"></i>
+                        Logout
+
+                    </button>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container page-container">
+
+    <div class="page-header">
+
+        <h2>
+            <i class="bi bi-plus-circle text-primary"></i>
+            Post a New Job
+        </h2>
+
+        <p>
+            Create a new job opportunity and attract talented candidates.
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        <!-- ================= FORM ================= -->
+
+        <div class="col-lg-8">
+
+            <div class="form-card">
+
+                <form id="postJobForm">
+
+                    <!-- Job Title -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Job Title
+                            <span class="required">*</span>
+                        </label>
+
+                        <div class="input-icon">
+
+                            <i class="bi bi-briefcase"></i>
+
+                            <input
+                                type="text"
+                                id="title"
+                                class="form-control"
+                                placeholder="Example: Java Full Stack Developer"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Description -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Job Description
+                            <span class="required">*</span>
+                        </label>
+
+                        <textarea
+                            id="description"
+                            class="form-control"
+                            placeholder="Enter job responsibilities, requirements and other details..."
+                            required></textarea>
+
+                    </div>
+
+
+                    <!-- Location + Salary -->
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-4">
+
+                            <label class="form-label">
+                                Location
+                                <span class="required">*</span>
+                            </label>
+
+                            <div class="input-icon">
+
+                                <i class="bi bi-geo-alt"></i>
+
+                                <input
+                                    type="text"
+                                    id="location"
+                                    class="form-control"
+                                    placeholder="Example: Chennai"
+                                    required>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6 mb-4">
+
+                            <label class="form-label">
+                                Salary
+                                <span class="required">*</span>
+                            </label>
+
+                            <div class="input-icon">
+
+                                <i class="bi bi-currency-rupee"></i>
+
+                                <input
+                                    type="text"
+                                    id="salary"
+                                    class="form-control"
+                                    placeholder="Example: ₹4 - ₹8 LPA"
+                                    required>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Skills -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Required Skills
+                            <span class="required">*</span>
+                        </label>
+
+                        <div class="input-icon">
+
+                            <i class="bi bi-code-slash"></i>
+
+                            <input
+                                type="text"
+                                id="skills"
+                                class="form-control"
+                                placeholder="Example: Java, Spring Boot, MySQL, HTML, CSS"
+                                required>
+
+                        </div>
+
+                        <small class="text-muted">
+                            Separate multiple skills using commas.
+                        </small>
+
+                    </div>
+
+
+                    <!-- Job Type + Experience -->
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-4">
+
+                            <label class="form-label">
+                                Job Type
+                                <span class="required">*</span>
+                            </label>
+
+                            <select
+                                id="jobType"
+                                class="form-select"
+                                required>
+
+                                <option value="">
+                                    Select Job Type
+                                </option>
+
+                                <option value="Full Time">
+                                    Full Time
+                                </option>
+
+                                <option value="Part Time">
+                                    Part Time
+                                </option>
+
+                                <option value="Internship">
+                                    Internship
+                                </option>
+
+                                <option value="Contract">
+                                    Contract
+                                </option>
+
+                                <option value="Remote">
+                                    Remote
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="col-md-6 mb-4">
+
+                            <label class="form-label">
+                                Experience
+                                <span class="required">*</span>
+                            </label>
+
+                            <select
+                                id="experience"
+                                class="form-select"
+                                required>
+
+                                <option value="">
+                                    Select Experience
+                                </option>
+
+                                <option value="Fresher">
+                                    Fresher
+                                </option>
+
+                                <option value="0-1 Years">
+                                    0-1 Years
+                                </option>
+
+                                <option value="1-3 Years">
+                                    1-3 Years
+                                </option>
+
+                                <option value="3-5 Years">
+                                    3-5 Years
+                                </option>
+
+                                <option value="5+ Years">
+                                    5+ Years
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Messages -->
+
+                    <div
+                        id="successMessage"
+                        class="alert alert-success"
+                        style="display:none;">
+
+                        <i class="bi bi-check-circle-fill"></i>
+                        Job posted successfully!
+
+                    </div>
+
+
+                    <div
+                        id="errorMessage"
+                        class="alert alert-danger"
+                        style="display:none;">
+
+                    </div>
+
+
+                    <!-- Buttons -->
+
+                    <div class="d-flex gap-2 justify-content-end">
+
+                        <a
+                            href="recruiter-dashboard.html"
+                            class="btn btn-outline-secondary cancel-btn">
+
+                            Cancel
+
+                        </a>
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary submit-btn"
+                            id="submitButton">
+
+                            <i class="bi bi-send"></i>
+                            Post Job
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= INFO ================= -->
+
+        <div class="col-lg-4">
+
+            <div class="info-card">
+
+                <h6>
+                    <i class="bi bi-lightbulb"></i>
+                    Tips for a Good Job Post
+                </h6>
+
+                <hr>
+
+                <p class="mb-3">
+                    <strong>Job Title:</strong>
+                    Use a clear and specific title.
+                </p>
+
+                <p class="mb-3">
+                    <strong>Description:</strong>
+                    Clearly explain responsibilities and requirements.
+                </p>
+
+                <p class="mb-3">
+                    <strong>Skills:</strong>
+                    Mention the important technical and soft skills.
+                </p>
+
+                <p class="mb-3">
+                    <strong>Salary:</strong>
+                    Provide a salary range to attract candidates.
+                </p>
+
+                <p>
+                    <strong>Experience:</strong>
+                    Select the appropriate experience level.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="container">
+
+        <p>
+            © 2026 JobPortal. Recruiter Management System.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<script>
+
+/* ==========================================
+   GET LOGGED-IN USER
+========================================== */
+
+const user =
+    JSON.parse(sessionStorage.getItem("loggedInUser")) ||
+    JSON.parse(localStorage.getItem("loggedInUser"));
+
+
+/* ==========================================
+   CHECK LOGIN
+========================================== */
+
+if (!user) {
+
+    window.location.href = "login.html";
+
+}
+
+
+/* ==========================================
+   CHECK RECRUITER ROLE
+========================================== */
+
+if (user && user.role !== "RECRUITER") {
+
+    alert("Access denied. Recruiter account required.");
+
+    window.location.href = "jobs.html";
+
+}
+
+
+/* ==========================================
+   LOGIN CREDENTIALS
+========================================== */
+
+const email =
+    sessionStorage.getItem("userEmail");
+
+const password =
+    sessionStorage.getItem("userPassword");
+
+
+/* ==========================================
+   FORM SUBMIT
+========================================== */
+
+document
+    .getElementById("postJobForm")
+    .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+
+        const successMessage =
+            document.getElementById("successMessage");
+
+        const errorMessage =
+            document.getElementById("errorMessage");
+
+        const submitButton =
+            document.getElementById("submitButton");
+
+
+        successMessage.style.display = "none";
+        errorMessage.style.display = "none";
+
+
+        /* Check login session */
+
+        if (!email || !password) {
+
+            errorMessage.innerText =
+                "Login session expired. Please login again.";
+
+            errorMessage.style.display = "block";
+
+            return;
+
+        }
+
+
+        /* Get form values */
+
+        const title =
+            document.getElementById("title")
+                .value.trim();
+
+        const description =
+            document.getElementById("description")
+                .value.trim();
+
+        const location =
+            document.getElementById("location")
+                .value.trim();
+
+        const salary =
+            document.getElementById("salary")
+                .value.trim();
+
+        const skills =
+            document.getElementById("skills")
+                .value.trim();
+
+        const jobType =
+            document.getElementById("jobType")
+                .value;
+
+        const experience =
+            document.getElementById("experience")
+                .value;
+
+
+        /* Create job object */
+
+        const jobData = {
+
+            title: title,
+
+            description: description,
+
+            location: location,
+
+            salary: salary,
+
+            skills: skills,
+
+            jobType: jobType,
+
+            experience: experience
+
+        };
+
+
+        /* Disable button */
+
+        submitButton.disabled = true;
+
+        submitButton.innerHTML = `
+            <span
+                class="spinner-border spinner-border-sm me-2">
+            </span>
+            Posting...
+        `;
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "http://localhost:8080/api/jobs",
+                    {
+                        method: "POST",
+
+                        headers: {
+
+                            "Authorization":
+                                "Basic " +
+                                btoa(
+                                    email +
+                                    ":" +
+                                    password
+                                ),
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify(jobData)
+
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                if (response.status === 403) {
+
+                    throw new Error(
+                        "You do not have permission to post a job."
+                    );
+
+                }
+
+                if (response.status === 401) {
+
+                    throw new Error(
+                        "Login session expired. Please login again."
+                    );
+
+                }
+
+                throw new Error(
+                    "Unable to post job."
+                );
+
+            }
+
+
+            const savedJob =
+                await response.json();
+
+
+            console.log(
+                "Job posted successfully:",
+                savedJob
+            );
+
+
+            successMessage.innerHTML = `
+                <i class="bi bi-check-circle-fill"></i>
+                Job posted successfully!
+            `;
+
+            successMessage.style.display = "block";
+
+
+            /* Clear form */
+
+            document
+                .getElementById("postJobForm")
+                .reset();
+
+
+            /* Restore button */
+
+            submitButton.disabled = false;
+
+            submitButton.innerHTML = `
+                <i class="bi bi-send"></i>
+                Post Job
+            `;
+
+
+            /* Redirect after success */
+
+            setTimeout(function() {
+
+                window.location.href =
+                    "manage-jobs.html";
+
+            }, 1500);
+
+
+        } catch (error) {
+
+            console.error(error);
+
+
+            errorMessage.innerHTML = `
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                ${error.message}
+            `;
+
+            errorMessage.style.display = "block";
+
+
+            submitButton.disabled = false;
+
+            submitButton.innerHTML = `
+                <i class="bi bi-send"></i>
+                Post Job
+            `;
+
+        }
+
+    });
+
+
+/* ==========================================
+   LOGOUT
+========================================== */
+
+function logout() {
+
+    sessionStorage.removeItem("loggedInUser");
+    sessionStorage.removeItem("userEmail");
+    sessionStorage.removeItem("userPassword");
+
+    localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("selectedJobId");
+
+    window.location.href = "login.html";
+
+}
+
+</script>
+
+</body>
+</html>

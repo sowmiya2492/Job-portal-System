@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Recruiter Dashboard - Job Portal</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #212529;
+        }
+
+        /* Navbar */
+
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            padding: 15px 0;
+        }
+
+        .brand {
+            font-size: 23px;
+            font-weight: 700;
+            color: #0d6efd;
+            text-decoration: none;
+        }
+
+        .brand i {
+            margin-right: 7px;
+        }
+
+        .nav-link {
+            color: #555 !important;
+            font-weight: 500;
+            margin: 0 7px;
+        }
+
+        .nav-link:hover {
+            color: #0d6efd !important;
+        }
+
+        .profile-btn {
+            border: none;
+            background: #eef4ff;
+            color: #0d6efd;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        /* Main */
+
+        .dashboard-container {
+            padding: 40px 0;
+        }
+
+        .welcome-section {
+            margin-bottom: 30px;
+        }
+
+        .welcome-section h2 {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .welcome-section p {
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+
+        /* Stat Cards */
+
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid #e9ecef;
+            height: 100%;
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 18px;
+        }
+
+        .icon-blue {
+            background: #e8f1ff;
+            color: #0d6efd;
+        }
+
+        .icon-orange {
+            background: #fff1df;
+            color: #f59f00;
+        }
+
+        .icon-green {
+            background: #e7f8ef;
+            color: #198754;
+        }
+
+        .icon-red {
+            background: #ffe8e8;
+            color: #dc3545;
+        }
+
+        .stat-card h3 {
+            font-size: 30px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .stat-card p {
+            margin: 5px 0 0;
+            color: #6c757d;
+        }
+
+        /* Quick Actions */
+
+        .section-card {
+            background: white;
+            border-radius: 18px;
+            border: 1px solid #e9ecef;
+            padding: 25px;
+            height: 100%;
+        }
+
+        .section-title {
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .action-card {
+            border: 1px solid #e9ecef;
+            border-radius: 14px;
+            padding: 20px;
+            text-decoration: none;
+            color: #212529;
+            display: block;
+            transition: 0.3s;
+            height: 100%;
+        }
+
+        .action-card:hover {
+            border-color: #0d6efd;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(13, 110, 253, 0.1);
+            color: #212529;
+        }
+
+        .action-icon {
+            font-size: 28px;
+            color: #0d6efd;
+            margin-bottom: 12px;
+        }
+
+        .action-card h6 {
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .action-card p {
+            font-size: 14px;
+            color: #6c757d;
+            margin: 0;
+        }
+
+        /* Applications */
+
+        .application-item {
+            border-bottom: 1px solid #eeeeee;
+            padding: 17px 0;
+        }
+
+        .application-item:last-child {
+            border-bottom: none;
+        }
+
+        .applicant-icon {
+            width: 45px;
+            height: 45px;
+            background: #eef4ff;
+            color: #0d6efd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .application-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .application-info {
+            color: #6c757d;
+            font-size: 13px;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-approved {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .status-rejected {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        /* Footer */
+
+        footer {
+            background: #ffffff;
+            border-top: 1px solid #e9ecef;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+
+        footer p {
+            margin: 0;
+            color: #6c757d;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Loading */
+
+        .loading-box {
+            text-align: center;
+            padding: 35px;
+            color: #6c757d;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 768px) {
+
+            .dashboard-container {
+                padding: 25px 15px;
+            }
+
+            .welcome-section h2 {
+                font-size: 24px;
+            }
+
+            .profile-btn {
+                margin-top: 10px;
+            }
+
+            .application-item {
+                align-items: flex-start !important;
+            }
+        }
+    </style>
+<link rel="stylesheet" href="css/ui-polish.css">
+</head>
+
+<body class="jp-reveal">
+
+<!-- Navbar -->
+
+<nav class="navbar navbar-expand-lg sticky-top">
+
+    <div class="container">
+
+        <a href="recruiter-dashboard.html" class="brand">
+            <i class="bi bi-briefcase-fill"></i>
+            JobPortal
+        </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMenu">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="recruiter-dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="post-job.html">
+                        Post Job
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="manage-jobs.html">
+                        Manage Jobs
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="applications.html">
+                        Applications
+                    </a>
+                </li>
+                <li class="nav-item">
+    <a class="nav-link" href="profile.html">
+        <i class="bi bi-person-circle"></i>
+        Profile
+    </a>
+</li>
+
+                <li class="nav-item ms-lg-2">
+
+                    <button
+                        class="profile-btn"
+                        onclick="logout()"
+                    >
+                        <i class="bi bi-box-arrow-right"></i>
+                        Logout
+                    </button>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- Dashboard -->
+
+<div class="container dashboard-container">
+
+    <!-- Welcome -->
+
+    <div class="welcome-section">
+
+        <h2>
+            Welcome, <span id="recruiterName">Recruiter</span> 👋
+        </h2>
+
+        <p>
+            Manage your job postings and track candidate applications.
+        </p>
+
+    </div>
+
+
+    <!-- Statistics -->
+
+    <div class="row g-4 mb-4">
+
+        <!-- Total Jobs -->
+
+        <div class="col-12 col-sm-6 col-lg-3">
+
+            <div class="stat-card">
+
+                <div class="stat-icon icon-blue">
+                    <i class="bi bi-briefcase"></i>
+                </div>
+
+                <h3 id="totalJobs">0</h3>
+
+                <p>Total Jobs</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Total Applications -->
+
+        <div class="col-12 col-sm-6 col-lg-3">
+
+            <div class="stat-card">
+
+                <div class="stat-icon icon-orange">
+                    <i class="bi bi-file-earmark-text"></i>
+                </div>
+
+                <h3 id="totalApplications">0</h3>
+
+                <p>Total Applications</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Approved -->
+
+        <div class="col-12 col-sm-6 col-lg-3">
+
+            <div class="stat-card">
+
+                <div class="stat-icon icon-green">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+
+                <h3 id="approvedApplications">0</h3>
+
+                <p>Approved</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Pending -->
+
+        <div class="col-12 col-sm-6 col-lg-3">
+
+            <div class="stat-card">
+
+                <div class="stat-icon icon-red">
+                    <i class="bi bi-clock-history"></i>
+                </div>
+
+                <h3 id="pendingApplications">0</h3>
+
+                <p>Pending</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Quick Actions -->
+
+    <div class="section-card mb-4">
+
+        <h5 class="section-title">
+            <i class="bi bi-lightning-charge-fill text-primary"></i>
+            Quick Actions
+        </h5>
+
+        <div class="row g-3">
+
+            <div class="col-12 col-md-4">
+
+                <a href="post-job.html" class="action-card">
+
+                    <div class="action-icon">
+                        <i class="bi bi-plus-circle"></i>
+                    </div>
+
+                    <h6>Post New Job</h6>
+
+                    <p>
+                        Create and publish a new job vacancy.
+                    </p>
+
+                </a>
+
+            </div>
+
+
+            <div class="col-12 col-md-4">
+
+                <a href="manage-jobs.html" class="action-card">
+
+                    <div class="action-icon">
+                        <i class="bi bi-pencil-square"></i>
+                    </div>
+
+                    <h6>Manage Jobs</h6>
+
+                    <p>
+                        Edit, update or delete your job postings.
+                    </p>
+
+                </a>
+
+            </div>
+
+
+            <div class="col-12 col-md-4">
+
+                <a href="applications.html" class="action-card">
+
+                    <div class="action-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+
+                    <h6>View Applications</h6>
+
+                    <p>
+                        Review candidates and manage applications.
+                    </p>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Recent Applications -->
+
+    <div class="section-card">
+
+        <div class="d-flex justify-content-between align-items-center mb-2">
+
+            <h5 class="section-title mb-0">
+                <i class="bi bi-clock-history text-primary"></i>
+                Recent Applications
+            </h5>
+
+            <a
+                href="applications.html"
+                class="btn btn-sm btn-outline-primary"
+            >
+                View All
+            </a>
+
+        </div>
+
+
+        <div id="applicationsContainer">
+
+            <div class="loading-box">
+
+                <div
+                    class="spinner-border text-primary"
+                    role="status"
+                ></div>
+
+                <p class="mt-3 mb-0">
+                    Loading applications...
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Footer -->
+
+<footer>
+
+    <div class="container">
+
+        <p>
+            © 2026 JobPortal. Recruiter Management System.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<script>
+
+    /* ================================
+       GET LOGGED IN USER
+    ================================= */
+
+    const user =
+        JSON.parse(sessionStorage.getItem("loggedInUser")) ||
+        JSON.parse(localStorage.getItem("loggedInUser"));
+
+
+    if (!user) {
+
+        window.location.href = "login.html";
+
+    }
+
+
+    /* ================================
+       CHECK RECRUITER
+    ================================= */
+
+    if (user && user.role !== "RECRUITER") {
+
+        alert("Access denied. Recruiter account required.");
+
+        window.location.href = "jobs.html";
+
+    }
+
+
+    /* ================================
+       DISPLAY RECRUITER NAME
+    ================================= */
+
+    if (user) {
+
+        document.getElementById("recruiterName").innerText =
+            user.name || "Recruiter";
+
+    }
+
+
+    /* ================================
+       LOGIN CREDENTIALS
+    ================================= */
+
+    const email =
+        sessionStorage.getItem("userEmail");
+
+    const password =
+        sessionStorage.getItem("userPassword");
+
+
+    /* ================================
+       BASIC AUTH
+    ================================= */
+
+    function getAuthHeaders() {
+
+        return {
+
+            "Authorization":
+                "Basic " + btoa(email + ":" + password),
+
+            "Content-Type":
+                "application/json"
+
+        };
+
+    }
+
+
+    /* ================================
+       LOAD DASHBOARD
+    ================================= */
+
+    async function loadDashboard() {
+
+        if (!email || !password) {
+
+            showDashboardError(
+                "Login session expired. Please login again."
+            );
+
+            return;
+
+        }
+
+
+        try {
+
+            /* -------------------------
+               LOAD JOBS
+            ------------------------- */
+
+            const jobsResponse =
+                await fetch(
+                    "http://localhost:8080/api/jobs",
+                    {
+                        method: "GET",
+                        headers: getAuthHeaders()
+                    }
+                );
+
+
+            if (!jobsResponse.ok) {
+
+                throw new Error(
+                    "Unable to load jobs"
+                );
+
+            }
+
+
+            const jobs =
+                await jobsResponse.json();
+
+
+            document.getElementById(
+                "totalJobs"
+            ).innerText = jobs.length;
+
+
+            /* -------------------------
+               LOAD APPLICATIONS
+            ------------------------- */
+
+            const applicationsResponse =
+                await fetch(
+                    "http://localhost:8080/api/applications",
+                    {
+                        method: "GET",
+                        headers: getAuthHeaders()
+                    }
+                );
+
+
+            if (!applicationsResponse.ok) {
+
+                throw new Error(
+                    "Unable to load applications"
+                );
+
+            }
+
+
+            const applications =
+                await applicationsResponse.json();
+
+
+            /* -------------------------
+               APPLICATION COUNTS
+            ------------------------- */
+
+            const total =
+                applications.length;
+
+
+            const pending =
+                applications.filter(
+                    app =>
+                        app.status &&
+                        app.status.toUpperCase() ===
+                        "PENDING"
+                ).length;
+
+
+            const approved =
+                applications.filter(
+                    app =>
+                        app.status &&
+                        app.status.toUpperCase() ===
+                        "APPROVED"
+                ).length;
+
+
+            const rejected =
+                applications.filter(
+                    app =>
+                        app.status &&
+                        app.status.toUpperCase() ===
+                        "REJECTED"
+                ).length;
+
+
+            document.getElementById(
+                "totalApplications"
+            ).innerText = total;
+
+
+            document.getElementById(
+                "pendingApplications"
+            ).innerText = pending;
+
+
+            document.getElementById(
+                "approvedApplications"
+            ).innerText = approved;
+
+
+            displayRecentApplications(
+                applications,
+                jobs
+            );
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            showDashboardError(
+                "Unable to load dashboard data. Please make sure Spring Boot is running."
+            );
+
+        }
+
+    }
+
+
+    /* ================================
+       DISPLAY RECENT APPLICATIONS
+    ================================= */
+
+    function displayRecentApplications(
+        applications,
+        jobs
+    ) {
+
+        const container =
+            document.getElementById(
+                "applicationsContainer"
+            );
+
+
+        if (!applications.length) {
+
+            container.innerHTML = `
+
+                <div class="text-center py-5">
+
+                    <i
+                        class="bi bi-file-earmark-x"
+                        style="font-size: 45px; color: #adb5bd;">
+                    </i>
+
+                    <h6 class="mt-3">
+                        No applications yet
+                    </h6>
+
+                    <p class="text-muted mb-0">
+                        Candidate applications will appear here.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        /* Show latest 5 */
+
+        const recentApplications =
+            applications.slice(-5).reverse();
+
+
+        container.innerHTML =
+            recentApplications.map(
+                application => {
+
+                    const job =
+                        jobs.find(
+                            j =>
+                                Number(j.id) ===
+                                Number(application.jobId)
+                        );
+
+
+                    const jobTitle =
+                        job
+                            ? job.title
+                            : "Job #" +
+                              application.jobId;
+
+
+                    let statusClass =
+                        "status-pending";
+
+
+                    if (
+                        application.status &&
+                        application.status.toUpperCase()
+                            === "APPROVED"
+                    ) {
+
+                        statusClass =
+                            "status-approved";
+
+                    }
+
+
+                    if (
+                        application.status &&
+                        application.status.toUpperCase()
+                            === "REJECTED"
+                    ) {
+
+                        statusClass =
+                            "status-rejected";
+
+                    }
+
+
+                    return `
+
+                        <div
+                            class="application-item
+                                   d-flex
+                                   justify-content-between
+                                   gap-3"
+                        >
+
+                            <div class="d-flex gap-3">
+
+                                <div class="applicant-icon">
+
+                                    <i class="bi bi-person"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <div class="application-title">
+
+                                        ${jobTitle}
+
+                                    </div>
+
+                                    <div class="application-info">
+
+                                        Job ID:
+                                        ${application.jobId}
+
+                                        &nbsp; • &nbsp;
+
+                                        Applied:
+                                        ${application.appliedDate || "N/A"}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div>
+
+                                <span
+                                    class="status-badge ${statusClass}"
+                                >
+
+                                    ${application.status || "PENDING"}
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+            ).join("");
+
+    }
+
+
+    /* ================================
+       ERROR MESSAGE
+    ================================= */
+
+    function showDashboardError(message) {
+
+        const container =
+            document.getElementById(
+                "applicationsContainer"
+            );
+
+
+        container.innerHTML = `
+
+            <div class="alert alert-danger">
+
+                <i class="bi bi-exclamation-triangle-fill"></i>
+
+                ${message}
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* ================================
+       LOGOUT
+    ================================= */
+
+    function logout() {
+
+        sessionStorage.removeItem("loggedInUser");
+        sessionStorage.removeItem("userEmail");
+        sessionStorage.removeItem("userPassword");
+
+        localStorage.removeItem("loggedInUser");
+        localStorage.removeItem("selectedJobId");
+
+        window.location.href = "login.html";
+
+    }
+
+
+    /* ================================
+       START DASHBOARD
+    ================================= */
+
+    loadDashboard();
+
+</script>
+
+</body>
+</html>

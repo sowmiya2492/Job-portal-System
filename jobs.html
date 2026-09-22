@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Find Jobs | JobPortal</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        /* Navbar */
+
+        .navbar {
+            background: white;
+            padding: 17px 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+        }
+
+        .navbar-brand {
+            font-size: 27px;
+            font-weight: 700;
+            color: #2563eb !important;
+        }
+
+        .navbar-brand i {
+            margin-right: 6px;
+        }
+
+        .nav-link {
+            color: #475569 !important;
+            font-weight: 500;
+            margin: 0 7px;
+        }
+
+        .nav-link:hover {
+            color: #2563eb !important;
+        }
+
+        .profile-btn {
+            border: none;
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 9px 14px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        /* Header */
+
+        .page-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 55px 0;
+        }
+
+        .page-header h1 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            color: #dbeafe;
+            margin: 0;
+            font-size: 17px;
+        }
+
+        /* Search */
+
+        .search-area {
+            margin-top: -30px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .search-box {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.10);
+        }
+
+        .search-input {
+            border: 1px solid #e2e8f0;
+            border-radius: 9px;
+            padding: 13px 15px;
+            width: 100%;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: #2563eb;
+        }
+
+        .search-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            padding: 13px 25px;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        .search-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* Main */
+
+        .jobs-section {
+            padding: 55px 0;
+        }
+
+        .results-title {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .job-count {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Job Card */
+
+        .job-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+
+        .job-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+
+        .job-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .company-icon {
+            width: 55px;
+            height: 55px;
+            background: #eff6ff;
+            color: #2563eb;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+        }
+
+        .job-card h4 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 18px;
+            margin-bottom: 7px;
+        }
+
+        .job-type {
+            background: #dcfce7;
+            color: #15803d;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .job-description {
+            color: #64748b;
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+
+        .job-info {
+            display: inline-block;
+            color: #64748b;
+            font-size: 14px;
+            margin-right: 20px;
+            margin-bottom: 10px;
+        }
+
+        .job-info i {
+            color: #2563eb;
+            margin-right: 5px;
+        }
+
+        .skills {
+            margin-top: 10px;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: #f1f5f9;
+            color: #334155;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .job-bottom {
+            border-top: 1px solid #e5e7eb;
+            margin-top: 18px;
+            padding-top: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .salary {
+            font-weight: 700;
+            color: #172033;
+        }
+
+        .apply-btn {
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+        }
+
+        .apply-btn:hover {
+            background: #1d4ed8;
+            color: white;
+        }
+
+        /* Loading */
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #64748b;
+        }
+
+        .loading i {
+            font-size: 35px;
+        }
+
+        /* Error */
+
+        .error-box {
+            display: none;
+            background: #fee2e2;
+            color: #b91c1c;
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Empty */
+
+        .empty-box {
+            display: none;
+            background: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 15px;
+        }
+
+        .empty-box i {
+            font-size: 55px;
+            color: #94a3b8;
+        }
+
+        .empty-box h4 {
+            margin-top: 15px;
+        }
+
+        .empty-box p {
+            color: #64748b;
+        }
+
+        /* Footer */
+
+        footer {
+            background: #0f172a;
+            color: white;
+            padding: 40px 0;
+            margin-top: 30px;
+        }
+
+        footer p {
+            color: #94a3b8;
+            margin: 0;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 768px) {
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+
+            .job-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .job-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .apply-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+<link rel="stylesheet" href="css/ui-polish.css">
+</head>
+
+
+<body class="jp-reveal">
+
+
+<!-- Navbar -->
+
+<nav class="navbar sticky-top">
+
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center w-100">
+
+            <a href="index.html" class="navbar-brand">
+                <i class="bi bi-briefcase-fill"></i>
+                JobPortal
+            </a>
+
+
+            <div class="d-flex align-items-center">
+
+                <a href="index.html" class="nav-link">
+                    Home
+                </a>
+
+                <a href="jobs.html" class="nav-link">
+                    Find Jobs
+                </a>
+
+                <a href="my-applications.html" class="nav-link">
+                    My Applications
+                </a>
+
+                <a href="profile.html" class="nav-link">
+                    Profile
+                </a>
+
+            </div>
+
+
+            <button class="profile-btn"
+                    onclick="logout()">
+
+                <i class="bi bi-box-arrow-right"></i>
+                Logout
+
+            </button>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- Page Header -->
+
+<section class="page-header">
+
+    <div class="container">
+
+        <h1>Find Your Dream Job</h1>
+
+        <p>
+            Explore the latest job opportunities and take the next step
+            in your career.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- Search -->
+
+<section class="search-area">
+
+    <div class="container">
+
+        <div class="search-box">
+
+            <div class="row g-3 align-items-center">
+
+                <div class="col-md-5">
+
+                    <input
+                        type="text"
+                        id="keyword"
+                        class="search-input"
+                        placeholder="Job title or skills">
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <input
+                        type="text"
+                        id="location"
+                        class="search-input"
+                        placeholder="Location">
+
+                </div>
+
+
+                <div class="col-md-3">
+
+                    <button
+                        class="search-btn"
+                        onclick="searchJobs()">
+
+                        <i class="bi bi-search"></i>
+                        Search Jobs
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Jobs -->
+
+<section class="jobs-section">
+
+    <div class="container">
+
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+
+                <div class="results-title">
+                    Latest Job Opportunities
+                </div>
+
+                <div class="job-count" id="jobCount">
+                    Loading jobs...
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Error -->
+
+        <div id="errorBox" class="error-box">
+
+            <i class="bi bi-exclamation-circle"></i>
+
+            Unable to load jobs.
+            Please make sure the Spring Boot server is running.
+
+        </div>
+
+
+        <!-- Loading -->
+
+        <div id="loadingBox" class="loading">
+
+            <i class="bi bi-arrow-repeat"></i>
+
+            <p class="mt-3">
+                Loading available jobs...
+            </p>
+
+        </div>
+
+
+        <!-- Empty -->
+
+        <div id="emptyBox" class="empty-box">
+
+            <i class="bi bi-search"></i>
+
+            <h4>No Jobs Found</h4>
+
+            <p>
+                Try searching with a different keyword or location.
+            </p>
+
+        </div>
+
+
+        <!-- Job List -->
+
+        <div id="jobList"></div>
+
+
+    </div>
+
+</section>
+
+
+<!-- Footer -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <h5>
+                    <i class="bi bi-briefcase-fill"></i>
+                    JobPortal
+                </h5>
+
+                <p>
+                    Connecting talented people with great career opportunities.
+                </p>
+
+            </div>
+
+
+            <div class="col-md-6 text-md-end mt-3 mt-md-0">
+
+                <p>
+                    © 2026 JobPortal. All Rights Reserved.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+
+    let allJobs = [];
+
+
+    /* Load Jobs */
+
+    async function loadJobs() {
+
+        const loadingBox =
+            document.getElementById("loadingBox");
+
+        const errorBox =
+            document.getElementById("errorBox");
+
+        const emptyBox =
+            document.getElementById("emptyBox");
+
+        try {
+
+            loadingBox.style.display = "block";
+            errorBox.style.display = "none";
+            emptyBox.style.display = "none";
+
+
+            const user =
+                JSON.parse(
+                    sessionStorage.getItem("loggedInUser")
+                );
+
+
+            const email =
+                sessionStorage.getItem("userEmail");
+
+            const password =
+                sessionStorage.getItem("userPassword");
+
+
+            if (!email || !password) {
+
+                window.location.href = "login.html";
+
+                return;
+            }
+
+
+            const response = await fetch(
+                "http://localhost:8080/api/jobs",
+                {
+                    method: "GET",
+
+                    headers: {
+                        "Authorization":
+                            "Basic " +
+                            btoa(email + ":" + password)
+                    }
+                }
+            );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Unable to load jobs"
+                );
+
+            }
+
+
+            allJobs = await response.json();
+
+
+            loadingBox.style.display = "none";
+
+            displayJobs(allJobs);
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            loadingBox.style.display = "none";
+
+            errorBox.style.display = "block";
+
+            document.getElementById("jobCount").innerText =
+                "Unable to load jobs";
+
+        }
+
+    }
+
+
+    /* Display Jobs */
+
+    function displayJobs(jobs) {
+
+        const jobList =
+            document.getElementById("jobList");
+
+        const emptyBox =
+            document.getElementById("emptyBox");
+
+        const jobCount =
+            document.getElementById("jobCount");
+
+
+        jobList.innerHTML = "";
+
+
+        if (jobs.length === 0) {
+
+            emptyBox.style.display = "block";
+
+            jobCount.innerText =
+                "0 jobs found";
+
+            return;
+        }
+
+
+        emptyBox.style.display = "none";
+
+
+        jobCount.innerText =
+            jobs.length + " jobs found";
+
+
+        jobs.forEach(function(job) {
+
+            const skills =
+                job.skills
+                    ? job.skills.split(",")
+                    : [];
+
+
+            let skillsHTML = "";
+
+
+            skills.forEach(function(skill) {
+
+                skillsHTML +=
+                    `<span class="skill-tag">
+                        ${skill.trim()}
+                    </span>`;
+
+            });
+
+
+            const jobCard = document.createElement("div");
+
+            jobCard.className = "job-card";
+
+
+            jobCard.innerHTML = `
+
+                <div class="job-top">
+
+                    <div class="company-icon">
+
+                        <i class="bi bi-building"></i>
+
+                    </div>
+
+                    <span class="job-type">
+
+                        ${job.jobType || "Full Time"}
+
+                    </span>
+
+                </div>
+
+
+                <h4>
+                    ${job.title || "Job Position"}
+                </h4>
+
+
+                <div class="job-description">
+
+                    ${job.description || "No description available."}
+
+                </div>
+
+
+                <div>
+
+                    <span class="job-info">
+
+                        <i class="bi bi-geo-alt"></i>
+
+                        ${job.location || "Not specified"}
+
+                    </span>
+
+
+                    <span class="job-info">
+
+                        <i class="bi bi-briefcase"></i>
+
+                        ${job.experience || "Fresher"}
+
+                    </span>
+
+                </div>
+
+
+                <div class="skills">
+
+                    ${skillsHTML}
+
+                </div>
+
+
+                <div class="job-bottom">
+
+                    <div class="salary">
+
+                        <i class="bi bi-currency-rupee"></i>
+
+                        ${job.salary || "Salary not disclosed"}
+
+                    </div>
+
+
+                    <button
+                        class="apply-btn"
+                        onclick="applyForJob(${job.id})">
+
+                        Apply Now
+                        <i class="bi bi-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            jobList.appendChild(jobCard);
+
+        });
+
+    }
+
+
+    /* Search Jobs */
+
+    function searchJobs() {
+
+        const keyword =
+            document
+                .getElementById("keyword")
+                .value
+                .toLowerCase()
+                .trim();
+
+
+        const location =
+            document
+                .getElementById("location")
+                .value
+                .toLowerCase()
+                .trim();
+
+
+        const filteredJobs =
+            allJobs.filter(function(job) {
+
+                const title =
+                    (job.title || "").toLowerCase();
+
+                const description =
+                    (job.description || "").toLowerCase();
+
+                const skills =
+                    (job.skills || "").toLowerCase();
+
+                const jobLocation =
+                    (job.location || "").toLowerCase();
+
+
+                const keywordMatch =
+                    keyword === "" ||
+                    title.includes(keyword) ||
+                    description.includes(keyword) ||
+                    skills.includes(keyword);
+
+
+                const locationMatch =
+                    location === "" ||
+                    jobLocation.includes(location);
+
+
+                return keywordMatch && locationMatch;
+
+            });
+
+
+        displayJobs(filteredJobs);
+
+    }
+
+
+    /* Apply */
+
+    function applyForJob(jobId) {
+
+        localStorage.setItem(
+            "selectedJobId",
+            jobId
+        );
+
+        window.location.href =
+            "apply.html";
+
+    }
+
+
+    /* Logout */
+
+    function logout() {
+
+        sessionStorage.removeItem("loggedInUser");
+        sessionStorage.removeItem("userEmail");
+        sessionStorage.removeItem("userPassword");
+
+        localStorage.removeItem("loggedInUser");
+
+        window.location.href =
+            "login.html";
+
+    }
+
+
+    /* Enter Key Search */
+
+    document
+        .getElementById("keyword")
+        .addEventListener(
+            "keypress",
+            function(event) {
+
+                if (event.key === "Enter") {
+
+                    searchJobs();
+
+                }
+
+            }
+        );
+
+
+    document
+        .getElementById("location")
+        .addEventListener(
+            "keypress",
+            function(event) {
+
+                if (event.key === "Enter") {
+
+                    searchJobs();
+
+                }
+
+            }
+        );
+
+
+    /* Start */
+
+    loadJobs();
+
+</script>
+
+
+</body>
+</html>

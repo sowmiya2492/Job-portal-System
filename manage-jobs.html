@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Jobs - JobPortal</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #212529;
+        }
+
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: 15px 0;
+        }
+
+        .brand {
+            font-size: 23px;
+            font-weight: 700;
+            color: #0d6efd;
+            text-decoration: none;
+        }
+
+        .brand i {
+            margin-right: 7px;
+        }
+
+        .nav-link {
+            color: #555 !important;
+            font-weight: 500;
+            margin: 0 7px;
+        }
+
+        .nav-link:hover {
+            color: #0d6efd !important;
+        }
+
+        .page-container {
+            padding: 40px 15px;
+        }
+
+        .page-header h2 {
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        .page-header p {
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+
+        .top-actions {
+            margin: 28px 0;
+        }
+
+        .search-box {
+            background: #ffffff;
+            padding: 18px;
+            border-radius: 15px;
+            border: 1px solid #e9ecef;
+            margin-bottom: 25px;
+        }
+
+        .job-card {
+            background: #ffffff;
+            border: 1px solid #e9ecef;
+            border-radius: 17px;
+            padding: 25px;
+            margin-bottom: 18px;
+            transition: 0.3s;
+        }
+
+        .job-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+        }
+
+        .job-icon {
+            width: 55px;
+            height: 55px;
+            background: #eef4ff;
+            color: #0d6efd;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            flex-shrink: 0;
+        }
+
+        .job-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .job-id {
+            font-size: 13px;
+            color: #6c757d;
+        }
+
+        .job-description {
+            color: #6c757d;
+            line-height: 1.6;
+            margin: 17px 0;
+        }
+
+        .job-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .job-info i {
+            color: #0d6efd;
+            margin-right: 5px;
+        }
+
+        .skill-badge {
+            display: inline-block;
+            background: #f0f4f8;
+            color: #495057;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 3px;
+        }
+
+        .action-buttons {
+            border-top: 1px solid #eeeeee;
+            padding-top: 17px;
+            margin-top: 18px;
+        }
+
+        .empty-box {
+            background: #ffffff;
+            border-radius: 17px;
+            padding: 60px 20px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+        }
+
+        .empty-box i {
+            font-size: 55px;
+            color: #adb5bd;
+        }
+
+        .loading-box {
+            background: #ffffff;
+            border-radius: 17px;
+            padding: 60px 20px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+        }
+
+        footer {
+            background: #ffffff;
+            border-top: 1px solid #e9ecef;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+
+        footer p {
+            margin: 0;
+            text-align: center;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        .modal-content {
+            border: none;
+            border-radius: 18px;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .modal-title {
+            font-weight: 700;
+        }
+
+        .form-label {
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+
+            .page-container {
+                padding: 30px 15px;
+            }
+
+            .job-card {
+                padding: 20px;
+            }
+
+            .job-info {
+                gap: 10px;
+            }
+        }
+    </style>
+<link rel="stylesheet" href="css/ui-polish.css">
+</head>
+
+<body class="jp-reveal">
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg sticky-top">
+
+    <div class="container">
+
+        <a href="recruiter-dashboard.html" class="brand">
+            <i class="bi bi-briefcase-fill"></i>
+            JobPortal
+        </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMenu">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        href="recruiter-dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        href="post-job.html">
+                        Post Job
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a
+                        class="nav-link active"
+                        href="manage-jobs.html">
+                        Manage Jobs
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        href="applications.html">
+                        Applications
+                    </a>
+                </li>
+
+                <li class="nav-item ms-lg-2">
+
+                    <button
+                        class="btn btn-outline-primary rounded-pill px-3"
+                        onclick="logout()">
+
+                        <i class="bi bi-box-arrow-right"></i>
+                        Logout
+
+                    </button>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container page-container">
+
+    <!-- Header -->
+
+    <div class="page-header">
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+            <div>
+
+                <h2>
+                    <i class="bi bi-briefcase text-primary"></i>
+                    Manage Jobs
+                </h2>
+
+                <p>
+                    View, edit and manage your job postings.
+                </p>
+
+            </div>
+
+            <a
+                href="post-job.html"
+                class="btn btn-primary">
+
+                <i class="bi bi-plus-circle"></i>
+                Post New Job
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Search -->
+
+    <div class="search-box">
+
+        <div class="input-group">
+
+            <span class="input-group-text bg-white">
+
+                <i class="bi bi-search"></i>
+
+            </span>
+
+            <input
+                type="text"
+                id="searchInput"
+                class="form-control"
+                placeholder="Search by job title, location or skills...">
+
+        </div>
+
+    </div>
+
+
+    <!-- Messages -->
+
+    <div
+        id="messageBox"
+        class="alert"
+        style="display:none;">
+    </div>
+
+
+    <!-- Jobs -->
+
+    <div id="jobsContainer">
+
+        <div class="loading-box">
+
+            <div
+                class="spinner-border text-primary"
+                role="status">
+            </div>
+
+            <p class="mt-3 mb-0">
+                Loading jobs...
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= EDIT MODAL ================= -->
+
+<div
+    class="modal fade"
+    id="editJobModal"
+    tabindex="-1">
+
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+                    <i class="bi bi-pencil-square text-primary"></i>
+                    Edit Job
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <form id="editJobForm">
+
+                    <input
+                        type="hidden"
+                        id="editId">
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Job Title
+                        </label>
+
+                        <input
+                            type="text"
+                            id="editTitle"
+                            class="form-control"
+                            required>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Description
+                        </label>
+
+                        <textarea
+                            id="editDescription"
+                            class="form-control"
+                            rows="4"
+                            required></textarea>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+                                Location
+                            </label>
+
+                            <input
+                                type="text"
+                                id="editLocation"
+                                class="form-control"
+                                required>
+
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+                                Salary
+                            </label>
+
+                            <input
+                                type="text"
+                                id="editSalary"
+                                class="form-control"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Skills
+                        </label>
+
+                        <input
+                            type="text"
+                            id="editSkills"
+                            class="form-control"
+                            required>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+                                Job Type
+                            </label>
+
+                            <select
+                                id="editJobType"
+                                class="form-select"
+                                required>
+
+                                <option value="Full Time">
+                                    Full Time
+                                </option>
+
+                                <option value="Part Time">
+                                    Part Time
+                                </option>
+
+                                <option value="Internship">
+                                    Internship
+                                </option>
+
+                                <option value="Contract">
+                                    Contract
+                                </option>
+
+                                <option value="Remote">
+                                    Remote
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+                                Experience
+                            </label>
+
+                            <select
+                                id="editExperience"
+                                class="form-select"
+                                required>
+
+                                <option value="Fresher">
+                                    Fresher
+                                </option>
+
+                                <option value="0-1 Years">
+                                    0-1 Years
+                                </option>
+
+                                <option value="1-3 Years">
+                                    1-3 Years
+                                </option>
+
+                                <option value="3-5 Years">
+                                    3-5 Years
+                                </option>
+
+                                <option value="5+ Years">
+                                    5+ Years
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="updateJob()">
+
+                    <i class="bi bi-check-circle"></i>
+                    Save Changes
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="container">
+
+        <p>
+            © 2026 JobPortal. Recruiter Management System.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<script>
+
+/* ==========================================
+   GET USER
+========================================== */
+
+const user =
+    JSON.parse(sessionStorage.getItem("loggedInUser")) ||
+    JSON.parse(localStorage.getItem("loggedInUser"));
+
+
+if (!user) {
+
+    window.location.href = "login.html";
+
+}
+
+
+if (user && user.role !== "RECRUITER") {
+
+    alert("Access denied. Recruiter account required.");
+
+    window.location.href = "jobs.html";
+
+}
+
+
+/* ==========================================
+   LOGIN DETAILS
+========================================== */
+
+const email =
+    sessionStorage.getItem("userEmail");
+
+const password =
+    sessionStorage.getItem("userPassword");
+
+
+/* ==========================================
+   STORE JOBS
+========================================== */
+
+let allJobs = [];
+
+
+/* ==========================================
+   LOAD JOBS
+========================================== */
+
+async function loadJobs() {
+
+    const container =
+        document.getElementById("jobsContainer");
+
+
+    if (!email || !password) {
+
+        container.innerHTML = `
+
+            <div class="alert alert-danger">
+
+                Login session expired.
+                Please login again.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                "http://localhost:8080/api/jobs",
+                {
+                    method: "GET",
+
+                    headers: {
+
+                        "Authorization":
+                            "Basic " +
+                            btoa(
+                                email +
+                                ":" +
+                                password
+                            )
+
+                    }
+
+                }
+            );
+
+
+        if (!response.ok) {
+
+            if (response.status === 403) {
+
+                throw new Error(
+                    "You do not have permission to manage jobs."
+                );
+
+            }
+
+            if (response.status === 401) {
+
+                throw new Error(
+                    "Login session expired."
+                );
+
+            }
+
+            throw new Error(
+                "Unable to load jobs."
+            );
+
+        }
+
+
+        allJobs =
+            await response.json();
+
+
+        displayJobs(allJobs);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        container.innerHTML = `
+
+            <div class="alert alert-danger">
+
+                <i class="bi bi-exclamation-triangle-fill"></i>
+
+                ${error.message}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ==========================================
+   DISPLAY JOBS
+========================================== */
+
+function displayJobs(jobs) {
+
+    const container =
+        document.getElementById("jobsContainer");
+
+
+    if (!jobs.length) {
+
+        container.innerHTML = `
+
+            <div class="empty-box">
+
+                <i class="bi bi-briefcase"></i>
+
+                <h5 class="mt-3">
+                    No Jobs Found
+                </h5>
+
+                <p class="text-muted">
+                    You haven't posted any jobs yet.
+                </p>
+
+                <a
+                    href="post-job.html"
+                    class="btn btn-primary">
+
+                    <i class="bi bi-plus-circle"></i>
+                    Post Your First Job
+
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        jobs.map(job => {
+
+            const skills =
+                job.skills
+                    ? job.skills
+                        .split(",")
+                        .map(skill =>
+                            `<span class="skill-badge">
+                                ${skill.trim()}
+                             </span>`
+                        )
+                        .join("")
+                    : "";
+
+
+            return `
+
+                <div class="job-card">
+
+                    <div class="d-flex gap-3">
+
+                        <div class="job-icon">
+
+                            <i class="bi bi-briefcase-fill"></i>
+
+                        </div>
+
+
+                        <div class="flex-grow-1">
+
+                            <div class="job-title">
+
+                                ${job.title || "Untitled Job"}
+
+                            </div>
+
+                            <div class="job-id">
+
+                                Job ID: ${job.id || "N/A"}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="job-description">
+
+                        ${job.description || "No description available."}
+
+                    </div>
+
+
+                    <div class="job-info">
+
+                        <span>
+
+                            <i class="bi bi-geo-alt-fill"></i>
+
+                            ${job.location || "N/A"}
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="bi bi-currency-rupee"></i>
+
+                            ${job.salary || "N/A"}
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="bi bi-clock-fill"></i>
+
+                            ${job.jobType || "N/A"}
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="bi bi-person-badge-fill"></i>
+
+                            ${job.experience || "N/A"}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="mt-3">
+
+                        ${skills}
+
+                    </div>
+
+
+                    <div class="action-buttons d-flex justify-content-end gap-2">
+
+                        <button
+                            class="btn btn-outline-primary btn-sm"
+                            onclick="openEditModal(${job.id})">
+
+                            <i class="bi bi-pencil"></i>
+                            Edit
+
+                        </button>
+
+
+                        <button
+                            class="btn btn-outline-danger btn-sm"
+                            onclick="deleteJob(${job.id})">
+
+                            <i class="bi bi-trash"></i>
+                            Delete
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* ==========================================
+   SEARCH
+========================================== */
+
+document
+    .getElementById("searchInput")
+    .addEventListener("input", function() {
+
+        const keyword =
+            this.value
+                .toLowerCase()
+                .trim();
+
+
+        if (!keyword) {
+
+            displayJobs(allJobs);
+
+            return;
+
+        }
+
+
+        const filteredJobs =
+            allJobs.filter(job => {
+
+                const title =
+                    (job.title || "")
+                        .toLowerCase();
+
+                const location =
+                    (job.location || "")
+                        .toLowerCase();
+
+                const skills =
+                    (job.skills || "")
+                        .toLowerCase();
+
+
+                return (
+                    title.includes(keyword) ||
+                    location.includes(keyword) ||
+                    skills.includes(keyword)
+                );
+
+            });
+
+
+        displayJobs(filteredJobs);
+
+    });
+
+
+/* ==========================================
+   OPEN EDIT MODAL
+========================================== */
+
+function openEditModal(jobId) {
+
+    const job =
+        allJobs.find(
+            j => Number(j.id) === Number(jobId)
+        );
+
+
+    if (!job) {
+
+        alert("Job not found.");
+
+        return;
+
+    }
+
+
+    document.getElementById("editId").value =
+        job.id;
+
+    document.getElementById("editTitle").value =
+        job.title || "";
+
+    document.getElementById("editDescription").value =
+        job.description || "";
+
+    document.getElementById("editLocation").value =
+        job.location || "";
+
+    document.getElementById("editSalary").value =
+        job.salary || "";
+
+    document.getElementById("editSkills").value =
+        job.skills || "";
+
+    document.getElementById("editJobType").value =
+        job.jobType || "Full Time";
+
+    document.getElementById("editExperience").value =
+        job.experience || "Fresher";
+
+
+    const modal =
+        new bootstrap.Modal(
+            document.getElementById("editJobModal")
+        );
+
+
+    modal.show();
+
+}
+
+
+/* ==========================================
+   UPDATE JOB
+========================================== */
+
+async function updateJob() {
+
+    const id =
+        document.getElementById("editId").value;
+
+
+    const jobData = {
+
+        title:
+            document.getElementById("editTitle")
+                .value.trim(),
+
+        description:
+            document.getElementById("editDescription")
+                .value.trim(),
+
+        location:
+            document.getElementById("editLocation")
+                .value.trim(),
+
+        salary:
+            document.getElementById("editSalary")
+                .value.trim(),
+
+        skills:
+            document.getElementById("editSkills")
+                .value.trim(),
+
+        jobType:
+            document.getElementById("editJobType")
+                .value,
+
+        experience:
+            document.getElementById("editExperience")
+                .value
+
+    };
+
+
+    if (!jobData.title ||
+        !jobData.description ||
+        !jobData.location ||
+        !jobData.salary ||
+        !jobData.skills) {
+
+        alert("Please fill all required fields.");
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                "http://localhost:8080/api/jobs/" + id,
+                {
+                    method: "PUT",
+
+                    headers: {
+
+                        "Authorization":
+                            "Basic " +
+                            btoa(
+                                email +
+                                ":" +
+                                password
+                            ),
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify(jobData)
+
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to update job."
+            );
+
+        }
+
+
+        const updatedJob =
+            await response.json();
+
+
+        /* Update local array */
+
+        const index =
+            allJobs.findIndex(
+                j =>
+                    Number(j.id) ===
+                    Number(id)
+            );
+
+
+        if (index !== -1) {
+
+            allJobs[index] =
+                updatedJob;
+
+        }
+
+
+        displayJobs(allJobs);
+
+
+        const modalElement =
+            document.getElementById(
+                "editJobModal"
+            );
+
+
+        const modal =
+            bootstrap.Modal.getInstance(
+                modalElement
+            );
+
+
+        if (modal) {
+
+            modal.hide();
+
+        }
+
+
+        showMessage(
+            "Job updated successfully!",
+            "success"
+        );
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+            error.message,
+            "danger"
+        );
+
+    }
+
+}
+
+
+/* ==========================================
+   DELETE JOB
+========================================== */
+
+async function deleteJob(jobId) {
+
+    const job =
+        allJobs.find(
+            j =>
+                Number(j.id) ===
+                Number(jobId)
+        );
+
+
+    const jobTitle =
+        job
+            ? job.title
+            : "this job";
+
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to delete " +
+            jobTitle +
+            "?"
+        );
+
+
+    if (!confirmed) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                "http://localhost:8080/api/jobs/" + jobId,
+                {
+                    method: "DELETE",
+
+                    headers: {
+
+                        "Authorization":
+                            "Basic " +
+                            btoa(
+                                email +
+                                ":" +
+                                password
+                            )
+
+                    }
+
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to delete job."
+            );
+
+        }
+
+
+        allJobs =
+            allJobs.filter(
+                job =>
+                    Number(job.id) !==
+                    Number(jobId)
+            );
+
+
+        displayJobs(allJobs);
+
+
+        showMessage(
+            "Job deleted successfully!",
+            "success"
+        );
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+            error.message,
+            "danger"
+        );
+
+    }
+
+}
+
+
+/* ==========================================
+   SHOW MESSAGE
+========================================== */
+
+function showMessage(message, type) {
+
+    const box =
+        document.getElementById("messageBox");
+
+
+    box.className =
+        "alert alert-" + type;
+
+
+    box.innerHTML =
+        `<i class="bi bi-info-circle-fill"></i> ${message}`;
+
+
+    box.style.display = "block";
+
+
+    setTimeout(function() {
+
+        box.style.display = "none";
+
+    }, 3000);
+
+}
+
+
+/* ==========================================
+   LOGOUT
+========================================== */
+
+function logout() {
+
+    sessionStorage.removeItem("loggedInUser");
+    sessionStorage.removeItem("userEmail");
+    sessionStorage.removeItem("userPassword");
+
+    localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("selectedJobId");
+
+    window.location.href = "login.html";
+
+}
+
+
+/* ==========================================
+   START
+========================================== */
+
+loadJobs();
+
+</script>
+
+</body>
+</html>
